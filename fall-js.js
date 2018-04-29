@@ -1,5 +1,37 @@
 window.onload = function(){
     imgLocation("container","box");
+    var imgData = {"data":[{"src":"1.jpg"} , {"src":"2.jpg"},{"src":"3.jpg"},{"src":"4.jpg"},
+    {"src":"5.jpg"},{"src":"6.jpg"},{"src":"7.jpg"},{"src":"8.jpg"},]} //JS模拟JSON字符串数据
+    //监听滚动条
+    window.onscroll = function(){
+        if(checkFlag()){
+            var cparent = document.getElementById("container");
+            for(var i = 0;i< imgData.length;i++){
+                var ccontent = document.createElement("div");
+                ccontent.className ="box";
+                cparent.appendChild(ccontent);
+                var boxImg = document.createElement("div");
+                boxImg.className = "box_img";
+                ccontent.appendChild(boxImg);
+                var img = document.createElement("img");
+                img.src = "img/"+imgData.data[i].src;
+                boxImg.appendChild(img);
+            }
+            imgLocation("container","box");
+        }
+    }
+}
+
+function checkFlag(){
+    var cparent = document.getElementById("container");
+    var ccontent = getChildElement(cparent,"box");
+    var lastContentHeight = ccontent[ccontent.length-1].offsetTop; //得到最后个图片的距离顶部高度
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;//滑动距离
+    var pageHeight = document.documentElement.clientHeight || document.body.clientHeight;//console.log(lastContentHeight+":"+scrollTop+":"+pageHeight);当scrollTop+pageHeight>lastContentHeight的时候，加载 
+    if(lastContentHeight<(scrollTop+pageHeight)){
+        console.log(lastContentHeight+","+scrollTop+","+pageHeight);
+        return true ;
+    }
 }
 
 function imgLocation(parent,content){
