@@ -5,8 +5,9 @@ window.onload = function(){
     //监听滚动条
     window.onscroll = function(){
         if(checkFlag()){
+            //alert(imgData.length);
             var cparent = document.getElementById("container");
-            for(var i = 0;i< imgData.length;i++){
+            for(var i = 0;i< imgData.data.length;i++){
                 var ccontent = document.createElement("div");
                 ccontent.className ="box";
                 cparent.appendChild(ccontent);
@@ -29,7 +30,6 @@ function checkFlag(){
     var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;//滑动距离
     var pageHeight = document.documentElement.clientHeight || document.body.clientHeight;//console.log(lastContentHeight+":"+scrollTop+":"+pageHeight);当scrollTop+pageHeight>lastContentHeight的时候，加载 
     if(lastContentHeight<(scrollTop+pageHeight)){
-        console.log(lastContentHeight+","+scrollTop+","+pageHeight);
         return true ;
     }
 }
